@@ -54,8 +54,6 @@ namespace Tushenka
 
     class Tushenka
     {
-        
-
         public Tushenka(string name, int productionDate, int yearsToExpire)
         {
             Name = name;
@@ -74,16 +72,16 @@ namespace Tushenka
         private int _ammountOfRecords = 20;
         private List<Tushenka> _tushenkaCans = new List<Tushenka>();
 
-        public void ShowAll(List<Tushenka>? players = null)
+        public void ShowAll(List<Tushenka>? tushenkaCans = null)
         {
-            if (players == null)
+            if (tushenkaCans == null)
             {
-                players = _tushenkaCans;
+                tushenkaCans = _tushenkaCans;
             }
 
-            foreach (var player in players)
+            foreach (var tushenka in tushenkaCans)
             {
-                WriteLine($"{player.Name}, Год изготовления: {player.ProductionDate}, Годен до: {player.DateOfExpire}");
+                WriteLine($"{tushenka.Name}, Год изготовления: {tushenka.ProductionDate}, Годен до: {tushenka.DateOfExpire}");
             }
         }
 
