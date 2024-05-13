@@ -1,6 +1,6 @@
 ﻿using static System.Console;
 
-namespace Tushenka
+namespace StewedMeatCans
 {
     class Programm
     {
@@ -13,17 +13,17 @@ namespace Tushenka
 
     class Menu
     {
-        private const string ShowAllCommand = "1";
-        private const string ShowExpiredCommand = "2";
-        private const string Exit = "0";
-
         public void Run()
         {
+            const string ShowAllCommand = "1";
+            const string ShowExpiredCommand = "2";
+            const string Exit = "0";
+
             string userInput;
             bool isExit = false;
 
             Database database = new Database();
-            database.CreateTushenkaCans();
+            database.CreateStewedMeatCans();
 
             while (isExit == false)
             {
@@ -52,9 +52,9 @@ namespace Tushenka
         }
     }
 
-    class Tushenka
+    class StewedMeat
     {
-        public Tushenka(string name, int productionDate, int yearsToExpire)
+        public StewedMeat(string name, int productionDate, int yearsToExpire)
         {
             Name = name;
             ProductionDate = productionDate;
@@ -70,18 +70,18 @@ namespace Tushenka
     {
         private int _yearsToExpire = 5;
         private int _ammountOfRecords = 20;
-        private List<Tushenka> _tushenkaCans = new List<Tushenka>();
+        private List<StewedMeat> _stewedMeatCans = new List<StewedMeat>();
 
-        public void ShowAll(List<Tushenka>? tushenkaCans = null)
+        public void ShowAll(List<StewedMeat>? stewedMeatCans = null)
         {
-            if (tushenkaCans == null)
+            if (stewedMeatCans == null)
             {
-                tushenkaCans = _tushenkaCans;
+                stewedMeatCans = _stewedMeatCans;
             }
 
-            foreach (var tushenka in tushenkaCans)
+            foreach (var stewedMeat in stewedMeatCans)
             {
-                WriteLine($"{tushenka.Name}, Год изготовления: {tushenka.ProductionDate}, Годен до: {tushenka.DateOfExpire}");
+                WriteLine($"{stewedMeat.Name}, Год изготовления: {stewedMeat.ProductionDate}, Годен до: {stewedMeat.DateOfExpire}");
             }
         }
 
@@ -89,22 +89,22 @@ namespace Tushenka
         {
             WriteLine("Показать просрочку");
 
-            var expiredTushenkaCans = _tushenkaCans.Where(tushenkaCan => tushenkaCan.DateOfExpire < DateTime.Now.Year).ToList();
+            var expiredStewedMeatCans = _stewedMeatCans.Where(stewedMeatCan => stewedMeatCan.DateOfExpire < DateTime.Now.Year).ToList();
 
-            ShowAll(expiredTushenkaCans);
+            ShowAll(expiredStewedMeatCans);
         }
 
-        public void CreateTushenkaCans()
+        public void CreateStewedMeatCans()
         {
             for (int i = 0; i < _ammountOfRecords; i++)
             {
-                _tushenkaCans.Add(new Tushenka(GetName(), GetProductionDate(), _yearsToExpire));
+                _stewedMeatCans.Add(new StewedMeat(GetName(), GetProductionDate(), _yearsToExpire));
             }
         }
 
         private string GetName()
         {
-            string[] tushenkaNames =
+            string[] stewedMeatNames =
             [
         "Божья коровка ",
         "Му-му",
@@ -122,7 +122,7 @@ namespace Tushenka
         "Suzuki Hayabusa"
             ];
 
-            string name = tushenkaNames[Utils.GetRandomNumber(tushenkaNames.Length - 1)];
+            string name = stewedMeatNames[Utils.GetRandomNumber(stewedMeatNames.Length - 1)];
             return name;
         }
 
